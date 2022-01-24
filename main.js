@@ -6,13 +6,34 @@ const message = require('./src/message.js');
 const admin = require('./src/admin.js');
 const user = require('./src/user.js');
 const fs = require('./src/database.js');
+const path = require('path');
 
 const app = express()
 let port = 2718;
 
+const reExt = /\.([a-z]+)/i;
+
+function content_type_from_extension( url)
+{
+	const m = url.match( reExt );
+	if ( !m ) return 'application/json'
+	const ext = m[1].toLowerCase();
+
+	switch( ext )
+	{
+		case 'js': return 'text/javascript';
+		case 'css': return 'text/css';
+		case 'html': return 'text/html';
+	}
+
+	return 'text/plain'
+}
+
 // General app settings
-const set_content_type = function (req, res, next) {
-	res.setHeader("Content-Type", "application/json; charset=utf-8");
+const set_content_type = function (req, res, next) 
+{
+	const content_type = req.baseUrl == '/api' ? "application/json; charset=utf-8" : content_type_from_extension( req.url)
+	res.setHeader("Content-Type", content_type);
 	next()
 }
 
@@ -40,6 +61,9 @@ router.delete('/delete_post', user.verifyToken, user.check_validation_token, (re
 router.get('/get_posts', user.verifyToken, user.check_validation_token, (req, res) => { post.get_posts(req, res) })
 router.get('/get_messages', user.verifyToken, user.check_validation_token, (req, res) => { message.get_messages(req, res) })
 router.post('/send_message', user.verifyToken, user.check_validation_token, (req, res) => { message.send_message(req, res) })
+
+
+app.use(express.static(path.join(__dirname, 'MTABookFrontEnd')));
 
 app.use('/api', router)
 
