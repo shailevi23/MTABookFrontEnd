@@ -7,5 +7,9 @@
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12"
   }
 }
