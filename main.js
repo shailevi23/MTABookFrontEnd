@@ -63,7 +63,7 @@ router.get('/get_messages', user.verifyToken, user.check_validation_token, (req,
 router.post('/send_message', user.verifyToken, user.check_validation_token, (req, res) => { message.send_message(req, res) })
 
 
-app.use(express.static(path.join(__dirname, 'MTABookFrontEnd')));
+app.use(express.static(path.join(__dirname, 'site')));
 
 app.use('/api', router)
 
