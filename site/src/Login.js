@@ -5,7 +5,7 @@ class Login extends React.Component {
         this.handle_change = this.handle_change.bind(this);
     }
 
-    handle_submit() {
+    async handle_submit() {
         // window.location.href = ;
         const check = await this.check_login();
     }
@@ -23,7 +23,7 @@ class Login extends React.Component {
 		const response = await fetch('/api/login', requestOptions);
 		if ( response.status != 200 )
 		  throw new Error( 'Error while fetching users');
-		const status =  response.status;
+		const status = await response.status;
 		return status;
 	}
 
