@@ -51,20 +51,25 @@ function log_in(req, res) {
 		return;
 	}
 
-	bcrypt.compare(password, current_user.password, function (err, result) {
-		if (result) {
-			//get a token and send it instead of sending current user
-			const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
-			g_tokens[token] = true;
-			g_id_to_tokens[current_user.id] = token;
-			res.send(JSON.stringify({ "token": token }));
-		}
-		else {
-			res.status(StatusCodes.BAD_REQUEST);
-			res.send("Wrong password");
-			return;
-		}
-	});
+	// bcrypt.compare(password, current_user.password, function (err, result) {
+	// 	if (result) {
+	// 		//get a token and send it instead of sending current user
+	// 		// const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
+	// 		// g_tokens[token] = true;
+	// 		// g_id_to_tokens[current_user.id] = token;
+	// 		// res.send(JSON.stringify({ "token": token }));
+			
+	// 		// return;
+		
+	// 	}
+	// 	else {
+	// 		res.status(StatusCodes.BAD_REQUEST);
+	// 		res.send("Wrong password");
+	// 		return;
+	// 	}
+	// });
+
+	res.send(JSON.stringify("good"));
 }
 
 function log_out(req, res) {
