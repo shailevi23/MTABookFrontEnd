@@ -9,16 +9,14 @@ class Login extends React.Component {
 
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, password: password })
-        };
-        console.log(document.getElementById('email').value);
-        const response = await fetch('/api/login', requestOptions);
+
+        const response = await fetch('/api/login', { method: 'POST',
+            body: JSON.stringify({ email: email, password: password }),
+            headers: { 'Content-Type': 'application/json' }
+        });
         if (response.status == 200) {
-            window.location.href = '/pages/home.html';
             console.log("success");
+            window.location.href = '/pages/home.html';
         } else {
             const err = await response.text();
             alert(err);

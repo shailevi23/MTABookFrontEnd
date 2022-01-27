@@ -27,7 +27,7 @@ function list_users(req, res) {
 	res.send(JSON.stringify(g_users));
 }
 
-function log_in(req, res) {
+async function log_in(req, res) {
 	const email = req.body.email;
 	const password = req.body.password;
 	const current_user = g_users.find(user => user.email == email);
@@ -51,25 +51,43 @@ function log_in(req, res) {
 		return;
 	}
 
-	// bcrypt.compare(password, current_user.password, function (err, result) {
-	// 	if (result) {
-	// 		//get a token and send it instead of sending current user
-	// 		// const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
-	// 		// g_tokens[token] = true;
-	// 		// g_id_to_tokens[current_user.id] = token;
-	// 		// res.send(JSON.stringify({ "token": token }));
-			
-	// 		// return;
-		
-	// 	}
-	// 	else {
-	// 		res.status(StatusCodes.BAD_REQUEST);
-	// 		res.send("Wrong password");
-	// 		return;
-	// 	}
-	// });
+	// const check = await compare_password(password, current_user);
+
+	// if(check) {
+	// 	res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
+	// 	console.log("check = true")
+	// 	return
+	// }
+	// else {
+	// 	console.log("check = false")
+	// 	res.status(StatusCodes.BAD_REQUEST);
+	// 	res.send("Wrong password");
+	// 	return;
+	// }
 
 	res.send(JSON.stringify("good"));
+}
+
+
+function compare_password(password, current_user) {
+	return new Promise(function(resolve, reject) {
+		bcrypt.compare(password, current_user.password, function (err, result) {
+			if (err) {
+				reject(err);
+			}
+			else {
+				if(result){
+					//get a token and send it instead of sending current user
+					const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
+					g_tokens[token] = true;
+					g_id_to_tokens[current_user.id] = token;
+				
+				}
+
+				resolve(result);
+			}
+		});
+	});
 }
 
 function log_out(req, res) {

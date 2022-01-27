@@ -1,15 +1,15 @@
 // External modules
 const express = require('express')
+const path = require('path');
+const StatusCodes = require('http-status-codes').StatusCodes;
 const package = require('./package.json');
 const post = require('./src/post.js');
 const message = require('./src/message.js');
 const admin = require('./src/admin.js');
 const user = require('./src/user.js');
-const fs = require('./src/database.js');
-const path = require('path');
 
 const app = express()
-let port = 2718;
+let  port = 2718;
 
 const reExt = /\.([a-z]+)/i;
 
@@ -37,12 +37,12 @@ const set_content_type = function (req, res, next)
 	next()
 }
 
-app.use(set_content_type);
+app.use(  set_content_type );
 app.use(express.json());  // to support JSON-encoded bodies
 app.use(express.urlencoded( // to support URL-encoded bodies
-	{
-		extended: true
-	}));
+{  
+  extended: true
+}));
 
 // Routing
 const router = express.Router();
@@ -65,13 +65,13 @@ router.post('/send_message', user.verifyToken, user.check_validation_token, (req
 
 app.use(express.static(path.join(__dirname, 'site')));
 
-app.use('/api', router)
+app.use('/api',router)
 
 
 // Init 
 
 let msg = `${package.description} listening at port ${port}`
-app.listen(port, () => { console.log(msg); })
+app.listen(port, () => { console.log( msg ) ; })
 
 
 
