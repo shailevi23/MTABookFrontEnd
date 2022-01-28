@@ -8,6 +8,7 @@ const message = require('./src/message.js');
 const admin = require('./src/admin.js');
 const user = require('./src/user.js');
 
+
 const app = express()
 let  port = 2718;
 
@@ -67,6 +68,15 @@ app.use(express.static(path.join(__dirname, 'site')));
 
 app.use('/api',router)
 
+
+// ---------------------------------- TEST -------------------------------
+// const stam = require('./src/stam.js')
+// router.delete('/user/(:id)', (req, res) => { stam.delete_user(req, res )  })
+// router.get('/users', (req, res) => { stam.list_users(req, res )  } )
+// router.post('/users', (req, res) => { stam.create_user(req, res )  } )
+
+
+// ---------------------------------- TEST -------------------------------
 
 // Init 
 

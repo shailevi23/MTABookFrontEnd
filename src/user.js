@@ -51,21 +51,19 @@ async function log_in(req, res) {
 		return;
 	}
 
-	// const check = await compare_password(password, current_user);
+	const check = await compare_password(password, current_user);
 
-	// if(check) {
-	// 	res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
-	// 	console.log("check = true")
-	// 	return
-	// }
-	// else {
-	// 	console.log("check = false")
-	// 	res.status(StatusCodes.BAD_REQUEST);
-	// 	res.send("Wrong password");
-	// 	return;
-	// }
-
-	res.send(JSON.stringify("good"));
+	if(check) {
+		res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
+		console.log("check = true")
+		return
+	}
+	else {
+		console.log("check = false")
+		res.status(StatusCodes.BAD_REQUEST);
+		res.send("Wrong password");
+		return;
+	}
 }
 
 
