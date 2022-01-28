@@ -20,7 +20,6 @@ function publish_post(req, res) {
 	const text = req.body.text;
 	const user_status = req.body.user.status;
 
-	// if (user_status === "actived") {
 	if (!text) {
 		res.status(StatusCodes.BAD_REQUEST);
 		res.send("Missing text in request")
@@ -42,37 +41,19 @@ function publish_post(req, res) {
 
 
 	res.send(JSON.stringify(new_post));
-	// }
-	// else {
-	// 	res.status(StatusCodes.UNAUTHORIZED); 
-	// 	res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-	// 	return;
-	// }
-
 }
 
 function get_posts(req, res) {
-	// const user_status = req.body.user.status;
-
-	// if (user_status === "actived") {
 	const posts = g_posts.filter(post => post.status == "published");
 	res.send(JSON.stringify(posts));
-	// }
-	// else {
-	// 	res.status(StatusCodes.UNAUTHORIZED); 
-	// 	res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-	// 	return;
-	// }
+	
 }
 
 function delete_post(req, res) {
-	// const user_status = req.body.user.status;
 	const uesrPostId = req.body.post;
 	let writer;
 	let isPostExist = false;
 
-
-	// if (user_status === "actived") {
 	for (let i = 0; i < g_posts.length; i++) {
 		if (g_posts[i].id == req.body.post) {
 			writer = g_posts[i].user_id;
@@ -100,13 +81,6 @@ function delete_post(req, res) {
 		db.write_file(g_posts, posts_file);
 		res.send(JSON.stringify("You delete the post successfuly !"));
 	}
-	// }
-	// else {
-	// 	res.status(StatusCodes.UNAUTHORIZED); 
-	// 	res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-	// 	return;
-	// }
-
 }
 
 module.exports = { posts_file, g_posts, publish_post, get_posts, delete_post };

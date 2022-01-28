@@ -135,60 +135,46 @@ function register(req, res) {
 }
 
 function verifyToken(req, res, next) {
-	// Get auth header value
-	const bearerHeader = req.headers['authorization'];
-	// Check if bearer is undefined
-	if (typeof bearerHeader !== 'undefined') {
-		// Split at the space
-		const bearer = bearerHeader.split(' ');
-		// Get token from array
-		const bearerToken = bearer[1];
-		// Set the token
-		req.token = bearerToken;
-		// Next middleware
-		next();
-	} else {
-		// Forbidden
-		res.sendStatus(403);
-	}
+	// // Get auth header value
+	// const bearerHeader = req.headers['authorization'];
+	// // Check if bearer is undefined
+	// if (typeof bearerHeader !== 'undefined') {
+	// 	// Split at the space
+	// 	const bearer = bearerHeader.split(' ');
+	// 	// Get token from array
+	// 	const bearerToken = bearer[1];
+	// 	// Set the token
+	// 	req.token = bearerToken;
+	// 	// Next middleware
+	// 	next();
+	// } else {
+	// 	// Forbidden
+	// 	res.sendStatus(403);
+	// }
 
 }
 
 function check_validation_token(req, res, next) {
-	jwt.verify(req.token, 'my_secret_key', function (err, result) {
-		if (err) {
-			res.status(StatusCodes.FORBIDDEN); // Forbidden
-			res.send("No access")
-			return;
-		}
-		else {
-			if (g_tokens[req.token]) {
-				req.body.user = result.current_user;
-				next();
-			}
-			else {
-				res.status(StatusCodes.FORBIDDEN); // Forbidden
-				res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-				return;
-			}
+	// jwt.verify(req.token, 'my_secret_key', function (err, result) {
+	// 	if (err) {
+	// 		res.status(StatusCodes.FORBIDDEN); // Forbidden
+	// 		res.send("No access")
+	// 		return;
+	// 	}
+	// 	else {
+	// 		if (g_tokens[req.token]) {
+	// 			req.body.user = result.current_user;
+	// 			next();
+	// 		}
+	// 		else {
+	// 			res.status(StatusCodes.FORBIDDEN); // Forbidden
+	// 			res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
+	// 			return;
+	// 		}
 
-		}
-	});
+	// 	}
+	// });
 }
-
-// function check_activate_authorization(req, res, next) { 
-// 	const user_status = req.body.user.status;
-// 	if (user_status === "actived") {
-// 		next();
-// 	}
-// 	else {
-// 		res.status(StatusCodes.UNAUTHORIZED); 
-// 		res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-// 		return;
-// 	}
-// }
-
-
 
 
 module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, verifyToken, check_validation_token, log_in, log_out, register };

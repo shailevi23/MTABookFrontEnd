@@ -2,6 +2,7 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.handle_submit = this.handle_submit.bind(this);
+        this.state = { visible: false };
     }
 
     async handle_submit() {
@@ -16,8 +17,8 @@ class Register extends React.Component {
 
         const response = await fetch('/api/register', requestOptions);
         if (response.status == 200) {
-            // window.location.href = ;
             console.log("success");
+            this.setState({ visible: true });
         } else {
             const err = await response.text();
             alert(err);
@@ -33,10 +34,18 @@ class Register extends React.Component {
             React.createElement('input', { type: 'password', id: 'password', placeholder: 'Password', required: true }),
             React.createElement(
                 'button',
-                { onClick: this.handle_submit },
-                'Log in'
+                { disabled: this.state.visible, onClick: this.handle_submit },
+                'Sign'
+            ),
+            React.createElement(
+                'div',
+                { style: { display: this.state.visible ? 'block' : 'none' } },
+                React.createElement(
+                    'span',
+                    null,
+                    'Registration confirmed, waiting for the admission!'
+                )
             )
         );
     }
-
 }

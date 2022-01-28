@@ -2,15 +2,11 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handle_submit = this.handle_submit.bind(this);
-
     }
 
-
     async handle_submit() {
-
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-
 
         const response = await fetch('/api/login',
             {
@@ -30,17 +26,9 @@ class Login extends React.Component {
 
     render() {
         return <div>
-
             <input type="email" id="email" placeholder="Email" required />
-
             <input type="password" id="password" placeholder="Password" required />
-
             <button onClick={this.handle_submit}>Log in</button>
-
         </div>
-
-
     }
-
-
 }

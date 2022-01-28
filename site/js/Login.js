@@ -5,7 +5,6 @@ class Login extends React.Component {
     }
 
     async handle_submit() {
-
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
@@ -35,5 +34,4 @@ class Login extends React.Component {
             )
         );
     }
-
 }
