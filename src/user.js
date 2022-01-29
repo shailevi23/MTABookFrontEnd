@@ -54,12 +54,15 @@ async function log_in(req, res) {
 	const check = await compare_password(password, current_user);
 
 	if(check) {
-		res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
-		console.log("check = true")
+		const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
+		g_tokens[token] = true;
+		g_id_to_tokens[current_user.id] = token;
+		res.cookie("stam", token);
+		// res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
+		res.send();
 		return
 	}
 	else {
-		console.log("check = false")
 		res.status(StatusCodes.BAD_REQUEST);
 		res.send("Wrong password");
 		return;
@@ -76,9 +79,9 @@ function compare_password(password, current_user) {
 			else {
 				if(result){
 					//get a token and send it instead of sending current user
-					const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
-					g_tokens[token] = true;
-					g_id_to_tokens[current_user.id] = token;
+					// const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
+					// g_tokens[token] = true;
+					// g_id_to_tokens[current_user.id] = token;
 				
 				}
 
@@ -135,45 +138,48 @@ function register(req, res) {
 }
 
 function verifyToken(req, res, next) {
-	// // Get auth header value
-	// const bearerHeader = req.headers['authorization'];
-	// // Check if bearer is undefined
-	// if (typeof bearerHeader !== 'undefined') {
-	// 	// Split at the space
-	// 	const bearer = bearerHeader.split(' ');
-	// 	// Get token from array
-	// 	const bearerToken = bearer[1];
-	// 	// Set the token
-	// 	req.token = bearerToken;
-	// 	// Next middleware
-	// 	next();
-	// } else {
-	// 	// Forbidden
-	// 	res.sendStatus(403);
-	// }
+// 	// Get auth header value
+// 	const bearerHeader = req.headers['authorization'];
+// 	// Check if bearer is undefined
+// 	if (typeof bearerHeader !== 'undefined') {
+// 		// Split at the space
+// 		const bearer = bearerHeader.split(' ');
+// 		// Get token from array
+// 		const bearerToken = bearer[1];
+// 		// Set the token
+// 		req.token = bearerToken;
+// 		// Next middleware
+// 		next();
+// 	} else {
+// 		// Forbidden
+// 		res.sendStatus(403);
+// 	}
+// 	console.log(req.cookies);
 
 }
 
 function check_validation_token(req, res, next) {
-	// jwt.verify(req.token, 'my_secret_key', function (err, result) {
-	// 	if (err) {
-	// 		res.status(StatusCodes.FORBIDDEN); // Forbidden
-	// 		res.send("No access")
-	// 		return;
-	// 	}
-	// 	else {
-	// 		if (g_tokens[req.token]) {
-	// 			req.body.user = result.current_user;
-	// 			next();
-	// 		}
-	// 		else {
-	// 			res.status(StatusCodes.FORBIDDEN); // Forbidden
-	// 			res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
-	// 			return;
-	// 		}
+	stam = req.cookies["stam"]
+	console.log(stam);
+	jwt.verify(stam, 'my_secret_key', function (err, result) {
+		if (err) {
+			res.status(StatusCodes.FORBIDDEN); // Forbidden
+			res.send("No access")
+			return;
+		}
+		else {
+			if (g_tokens[stam]) {
+				req.body.user = result.current_user;
+				next();
+			}
+			else {
+				res.status(StatusCodes.FORBIDDEN); // Forbidden
+				res.send("No access, reason is one of the following: \n 1.Register \n 2.Wait for activation \n 3.Refresh the token by Logout and Login again please");
+				return;
+			}
 
-	// 	}
-	// });
+		}
+	});
 }
 
 

@@ -11,8 +11,7 @@ class PostItem extends React.Component {
 				'span',
 				null,
 				this.props.post.message
-			),
-			React.createElement('br', null)
+			)
 		);
 	}
 }
@@ -30,7 +29,11 @@ class PostList extends React.Component {
 
 	async fetch_posts() {
 		const response = await fetch('/api/get_posts');
-		if (response.status != 200) throw new Error('Error while fetching posts');
+		if (response.status != 200) {
+			window.location.href = '/pages/login.html';
+			alert("You have to log in !");
+		}
+
 		const data = await response.json();
 		return data;
 	}

@@ -8,20 +8,26 @@
 	<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
 	<script src="../js/Home.js"></script>
+	<script src="../js/NavigationBar.js"></script>
 	<!-- <link rel="stylesheet" type='text/css' href="css/sample.css"> -->
 </head>
 
 <body>
 
 	<h1>Home Page<h1>
+	<div id='navigation-menu'></id>
+	<br>
 	<div id='sample-container'></id>
 
 </body>
 
 <script>
 
-const domContainer = document.querySelector('#sample-container');
-ReactDOM.render( React.createElement(Home), domContainer);
+const domContainer1 = document.querySelector('#navigation-menu');
+// ReactDOM.render( React.createElement(NavigationBar), domContainer1);
+
+const domContainer2 = document.querySelector('#sample-container');
+ReactDOM.render( React.createElement(Home), domContainer2);
 
 </script>
 

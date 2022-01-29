@@ -1,5 +1,6 @@
 // External modules
 const express = require('express')
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const StatusCodes = require('http-status-codes').StatusCodes;
 const package = require('./package.json');
@@ -45,6 +46,8 @@ app.use(express.urlencoded( // to support URL-encoded bodies
   extended: true
 }));
 
+app.use(cookieParser());
+
 // Routing
 const router = express.Router();
 
@@ -60,8 +63,9 @@ router.put('/restore/:id', user.verifyToken, user.check_validation_token, admin.
 router.post('/publish', user.verifyToken, user.check_validation_token, (req, res) => { post.publish_post(req, res) })
 router.delete('/delete_post', user.verifyToken, user.check_validation_token, (req, res) => { post.delete_post(req, res) })
 // router.get('/get_posts', user.verifyToken, user.check_validation_token, (req, res) => { post.get_posts(req, res) })
-router.get('/get_posts', (req, res) => { post.get_posts(req, res) })
-router.get('/get_messages', user.verifyToken, user.check_validation_token, (req, res) => { message.get_messages(req, res) })
+router.get('/get_posts', user.check_validation_token, (req, res) => { post.get_posts(req, res) })
+// router.get('/get_messages', user.verifyToken, user.check_validation_token, (req, res) => { message.get_messages(req, res) })
+router.get('/get_messages', user.check_validation_token, (req, res) => { message.get_messages(req, res) })
 router.post('/send_message', user.verifyToken, user.check_validation_token, (req, res) => { message.send_message(req, res) })
 
 
