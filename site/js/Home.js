@@ -19,12 +19,12 @@ class PostItem extends React.Component {
 class PostList extends React.Component {
 	constructor(props) {
 		super(props);
+		this.handle_click = this.handle_click.bind(this);
 		this.state = { posts: [] };
 	}
 
 	async componentDidMount() {
-		const posts = await this.fetch_posts();
-		this.update_list(posts);
+		this.update_list();
 	}
 
 	async fetch_posts() {
@@ -38,8 +38,28 @@ class PostList extends React.Component {
 		return data;
 	}
 
-	update_list(posts) {
-		this.setState({ posts: posts });
+	async update_list() {
+		const posts = await this.fetch_posts();
+		const reverse_posts = posts.reverse();
+		this.setState({ posts: reverse_posts });
+	}
+
+	async handle_click() {
+		const text = document.getElementById('post_message').value;
+
+		const response = await fetch('/api/publish', {
+			method: 'POST',
+			body: JSON.stringify({ text: text }),
+			headers: { 'Content-Type': 'application/json' }
+		});
+		if (response.status == 200) {
+			alert("Your post is published !");
+			this.update_list();
+			document.getElementById('post_message').value = "";
+		} else {
+			const err = await response.text();
+			alert(err);
+		}
 	}
 
 	render() {
@@ -48,11 +68,22 @@ class PostList extends React.Component {
 			null,
 			React.createElement(
 				'div',
-				null,
+				{ id: 'post' },
 				this.state.posts.map((item, index) => {
 					return React.createElement(PostItem, {
 						post: item, key: index });
 				})
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement('input', { type: 'text', id: 'post_message', placeholder: 'Write a post', required: true }),
+				React.createElement('br', null),
+				React.createElement(
+					'button',
+					{ onClick: this.handle_click },
+					'Post'
+				)
 			)
 		);
 	}
@@ -67,6 +98,11 @@ class Home extends React.Component {
 		return React.createElement(
 			'div',
 			null,
+			React.createElement(
+				'h5',
+				null,
+				'All the posts:'
+			),
 			React.createElement(
 				'div',
 				null,

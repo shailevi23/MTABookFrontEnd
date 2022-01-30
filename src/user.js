@@ -160,7 +160,6 @@ function verifyToken(req, res, next) {
 
 function check_validation_token(req, res, next) {
 	stam = req.cookies["stam"]
-	console.log(stam);
 	jwt.verify(stam, 'my_secret_key', function (err, result) {
 		if (err) {
 			res.status(StatusCodes.FORBIDDEN); // Forbidden

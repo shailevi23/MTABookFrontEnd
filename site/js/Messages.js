@@ -33,7 +33,6 @@ class MessageList extends React.Component {
 			window.location.href = '/pages/login.html';
 			alert("You have to log in !");
 		}
-		throw new Error('Error while fetching messages');
 		const data = await response.json();
 		return data;
 	}

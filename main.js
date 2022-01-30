@@ -60,7 +60,7 @@ router.delete('/delete_user_by_admin', user.verifyToken, user.check_validation_t
 router.put('/approve/:id', user.verifyToken, user.check_validation_token, admin.check_admin, admin.check_id, (req, res) => { admin.approve_user(req, res) })
 router.put('/suspend/:id', user.verifyToken, user.check_validation_token, admin.check_admin, admin.check_id, (req, res) => { admin.suspend_user(req, res) })
 router.put('/restore/:id', user.verifyToken, user.check_validation_token, admin.check_admin, admin.check_id, (req, res) => { admin.restore_user(req, res) })
-router.post('/publish', user.verifyToken, user.check_validation_token, (req, res) => { post.publish_post(req, res) })
+router.post('/publish', user.check_validation_token, (req, res) => { post.publish_post(req, res) })
 router.delete('/delete_post', user.verifyToken, user.check_validation_token, (req, res) => { post.delete_post(req, res) })
 // router.get('/get_posts', user.verifyToken, user.check_validation_token, (req, res) => { post.get_posts(req, res) })
 router.get('/get_posts', user.check_validation_token, (req, res) => { post.get_posts(req, res) })
