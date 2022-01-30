@@ -27,6 +27,17 @@ function list_users(req, res) {
 	res.send(JSON.stringify(g_users));
 }
 
+function get_friends(req, res) {
+	const friends= [];
+	for(let i=0; i < g_users.length; i++){
+		if(g_users[i].id != req.body.user.id) {
+			const friend = {id: g_users[i].id, name:g_users[i].name};
+			friends.push(friend);
+		}
+	}
+	res.send(JSON.stringify(friends));
+}
+
 async function log_in(req, res) {
 	const email = req.body.email;
 	const password = req.body.password;
@@ -182,4 +193,4 @@ function check_validation_token(req, res, next) {
 }
 
 
-module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, verifyToken, check_validation_token, log_in, log_out, register };
+module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, get_friends, verifyToken, check_validation_token, log_in, log_out, register };

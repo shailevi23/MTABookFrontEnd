@@ -52,6 +52,7 @@ app.use(cookieParser());
 const router = express.Router();
 
 router.get('/users', user.verifyToken, user.check_validation_token, (req, res) => { user.list_users(req, res) })
+router.get('/get_friends', user.check_validation_token, (req, res) => { user.get_friends(req, res) })
 router.post('/login', (req, res) => { user.log_in(req, res) })
 router.delete('/logout', user.verifyToken, user.check_validation_token, (req, res) => { user.log_out(req, res) })
 router.post('/register', (req, res) => { user.register(req, res) })
@@ -66,7 +67,7 @@ router.delete('/delete_post', user.verifyToken, user.check_validation_token, (re
 router.get('/get_posts', user.check_validation_token, (req, res) => { post.get_posts(req, res) })
 // router.get('/get_messages', user.verifyToken, user.check_validation_token, (req, res) => { message.get_messages(req, res) })
 router.get('/get_messages', user.check_validation_token, (req, res) => { message.get_messages(req, res) })
-router.post('/send_message', user.verifyToken, user.check_validation_token, (req, res) => { message.send_message(req, res) })
+router.post('/send_message', user.check_validation_token, (req, res) => { message.send_message(req, res) })
 
 
 app.use(express.static(path.join(__dirname, 'site')));
