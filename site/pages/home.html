@@ -15,10 +15,8 @@
 <body>
 
 	<h1>Home Page<h1>
-	
-		<div id='navigation-menu'></id>
-		<h5>------------separation------------</h5>
 		<div id='sample-container'></id>
+		<div id='navigation-menu'></id>
 	
 	
 </body>
@@ -27,11 +25,14 @@
 
 
 
-// const domContainer2 = document.getElementById('sample-container');
+const domContainer = document.getElementById('sample-container');
 // ReactDOM.render( React.createElement(Home), domContainer2);
+ReactDOM.render( React.createElement("div", null, [React.createElement(NavigationBar),
+												React.createElement(Home)]),
+												 domContainer);
 
-const domContainer1 = document.getElementById('navigation-menu');
-ReactDOM.render( React.createElement(NavigationBar), domContainer1);
+// const domContainer1 = document.getElementById('navigation-menu');
+// ReactDOM.render( React.createElement(NavigationBar), domContainer1);
 
 </script>
 

@@ -21,7 +21,9 @@
 <script>
 
 const domContainer = document.querySelector('#sample-container');
-ReactDOM.render( React.createElement(Messages), domContainer);
+ReactDOM.render( React.createElement("div", null, [React.createElement(NavigationBar),
+												React.createElement(Messages)]),
+												 domContainer);
 
 
 </script>
