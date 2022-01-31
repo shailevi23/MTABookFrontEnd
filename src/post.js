@@ -3,12 +3,13 @@ const g_posts = []
 const posts_file = './files/posts.json';
 const db = require('./database.js');
 
-function Post(message, id, date, user_id) {
+function Post(message, id, date, user_id, publisher) {
 	this.message = message;
 	this.id = id;
 	this.date = date;
 	this.user_id = user_id;
 	this.status = 'published';
+	this.publisher = publisher;
 }
 
 db.read_data(g_posts, posts_file).then(
@@ -19,7 +20,7 @@ db.read_data(g_posts, posts_file).then(
 function publish_post(req, res) {
 	const text = req.body.text;
 	const user_status = req.body.user.status;
-
+	
 	if (!text) {
 		res.status(StatusCodes.BAD_REQUEST);
 		res.send("Missing text in request")
@@ -34,7 +35,7 @@ function publish_post(req, res) {
 
 	const new_id = max_id + 1;
 
-	const new_post = new Post(text, new_id, new Date(), req.body.user.id);
+	const new_post = new Post(text, new_id, new Date(), req.body.user.id, req.body.user.name);
 	g_posts.push(new_post);
 
 	db.write_file(g_posts, posts_file);

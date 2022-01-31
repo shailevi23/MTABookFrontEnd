@@ -9,6 +9,15 @@ class PostItem extends React.Component {
 			{ className: 'PostItem', 'data-id': this.props.post.id },
 			React.createElement(
 				'span',
+				{ id: 'from' },
+				'From ',
+				this.props.post.publisher,
+				', ',
+				this.props.post.date
+			),
+			React.createElement('br', null),
+			React.createElement(
+				'span',
 				null,
 				this.props.post.message
 			)
@@ -68,14 +77,6 @@ class PostList extends React.Component {
 			null,
 			React.createElement(
 				'div',
-				{ id: 'post' },
-				this.state.posts.map((item, index) => {
-					return React.createElement(PostItem, {
-						post: item, key: index });
-				})
-			),
-			React.createElement(
-				'div',
 				null,
 				React.createElement('input', { type: 'text', id: 'post_message', placeholder: 'Write a post', required: true }),
 				React.createElement('br', null),
@@ -84,6 +85,15 @@ class PostList extends React.Component {
 					{ onClick: this.handle_click },
 					'Post'
 				)
+			),
+			React.createElement('br', null),
+			React.createElement(
+				'div',
+				{ id: 'post' },
+				this.state.posts.map((item, index) => {
+					return React.createElement(PostItem, {
+						post: item, key: index });
+				})
 			)
 		);
 	}
@@ -98,11 +108,6 @@ class Home extends React.Component {
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(
-				'h5',
-				null,
-				'All the posts:'
-			),
 			React.createElement(
 				'div',
 				null,

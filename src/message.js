@@ -5,12 +5,13 @@ const g_messages = [];
 const everyone = "everyone";
 const messages_file = './files/messages.json';
 
-function Message(message, id, date, from, to) {
+function Message(message, id, date, from, to, sender_name) {
 	this.message = message;
 	this.id = id;
 	this.date = date;
 	this.from = from;
 	this.to = to;
+	this.sender_name = sender_name;
 }
 
 db.read_data(g_messages, messages_file).then(
@@ -57,7 +58,7 @@ function send_message(req, res) {
 
 	const new_id = max_id + 1;
 
-	const new_message = new Message(text, new_id, new Date(), req.body.user.id, friend_id);
+	const new_message = new Message(text, new_id, new Date(), req.body.user.id, friend_id, req.body.user.name);
 	g_messages.push(new_message);
 	db.write_file(g_messages, messages_file);
 
@@ -65,7 +66,8 @@ function send_message(req, res) {
 }
 
 function get_messages(req, res) {
-	const messages = g_messages.filter(message => message.to === everyone || message.to == req.body.user.id);
+	const messages = g_messages.filter(message => (message.to === everyone || message.to == req.body.user.id)
+										 && message.from != req.body.user.id);
 	res.send(JSON.stringify(messages));
 }
 

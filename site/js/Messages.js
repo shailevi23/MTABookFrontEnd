@@ -9,6 +9,15 @@ class MessageItem extends React.Component {
 			{ className: 'MessageItem', 'data-id': this.props.message.id },
 			React.createElement(
 				'span',
+				{ id: 'from' },
+				'From ',
+				this.props.message.from,
+				', ',
+				this.props.message.date
+			),
+			React.createElement('br', null),
+			React.createElement(
+				'span',
 				null,
 				this.props.message.message
 			)
@@ -96,14 +105,6 @@ class MessageList extends React.Component {
 			React.createElement(
 				'div',
 				null,
-				this.state.messages.map((item, index) => {
-					return React.createElement(MessageItem, {
-						message: item, key: index });
-				})
-			),
-			React.createElement(
-				'div',
-				null,
 				React.createElement(
 					'select',
 					{ id: 'friend-select' },
@@ -119,6 +120,19 @@ class MessageList extends React.Component {
 					'button',
 					{ onClick: this.handle_click },
 					'Send'
+				)
+			),
+			React.createElement(
+				'div',
+				null,
+				this.state.messages.map((item, index) => {
+					return React.createElement(MessageItem, {
+						message: item, key: index });
+				}),
+				React.createElement(
+					'span',
+					{ style: { display: this.state.messages.length ? 'none' : 'block' } },
+					'You have no messsages!'
 				)
 			)
 		);

@@ -6,6 +6,8 @@ class MessageItem extends React.Component {
 
 	render() {
 		return <div className='MessageItem' data-id={this.props.message.id}>
+			<span id="from">From {this.props.message.from}, {this.props.message.date}</span>
+			<br />
 			<span>{this.props.message.message}</span>
 		</div>
 	}
@@ -89,12 +91,7 @@ class MessageList extends React.Component {
 
     render() {
 		return <div>
-			<div>
-				{this.state.messages.map((item, index) => {
-					return <MessageItem
-						 message={item} key={index} />
-				})}
-			</div>
+			
 			<div>
 				<select id="friend-select">
     				<option value="">--Please choose a friend--</option>
@@ -102,6 +99,15 @@ class MessageList extends React.Component {
 				<input type="text" id="send_message" placeholder="Write a message" required></input>
 				<br></br>
 				<button onClick={this.handle_click}>Send</button>
+			</div>
+			<div>
+				{this.state.messages.map((item, index) => {
+					return <MessageItem
+						 message={item} key={index} />
+				})}
+				<span style={{ display: (this.state.messages.length ? 'none' : 'block') }}>
+					 You have no messsages!
+				</span>
 			</div>
 		</div>
     }

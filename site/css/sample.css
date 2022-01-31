@@ -27,27 +27,41 @@ button
 
 #sample-container
 {
-	margin-top: 5rem;
+	margin-top: 3rem;
 	text-align: left;
 	color: blue;
-	margin-left: 30%;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
-.UserItem
+.PostItem
 {
+	border: 2px solid black;
 	margin-top: 8px;
 	margin-bottom: 8px;
 }
 
-.UserItem span
+.PostItem span
 {
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-.UserItem .fa:hover
+#from 
 {
-	color: red;
-	opacity: 1;
-	cursor: pointer;
+	font-size: 18px;
+	color: green;
+}
+
+.MessageItem
+{
+	border: 2px solid black;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.MessageItem span
+{
+	margin-left: 10px;
+	margin-right: 10px;
 }

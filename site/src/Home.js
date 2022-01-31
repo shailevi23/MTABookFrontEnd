@@ -6,6 +6,8 @@ class PostItem extends React.Component {
 
 	render() {
 		return <div className='PostItem' data-id={this.props.post.id}>
+			<span id="from">From {this.props.post.publisher}, {this.props.post.date}</span>
+			<br />
 			<span>{this.props.post.message}</span>
 		</div>
 	}
@@ -62,16 +64,17 @@ class PostList extends React.Component {
 
     render() {
 		return <div>
+			<div>
+				<input type="text" id="post_message" placeholder="Write a post" required></input>
+				<br />
+				<button onClick={this.handle_click}>Post</button>
+			</div>
+			<br />
 			<div id="post">
 				{this.state.posts.map((item, index) => {
 					return <PostItem
 						 post={item} key={index} />
 				})}
-			</div>
-			<div>
-				<input type="text" id="post_message" placeholder="Write a post" required></input>
-				<br></br>
-				<button onClick={this.handle_click}>Post</button>
 			</div>
 		</div>
     }
@@ -86,7 +89,6 @@ class Home extends React.Component {
 
     render() {
 		return <div>
-			<h5>All the posts:</h5>
 			<div><PostList/></div>
 		</div>
     }
