@@ -19,6 +19,8 @@ class ReactButton extends React.Component {
   }
 }
 
+// import ReactButton from './ReactButton';
+
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
@@ -35,3 +37,5 @@ class NavigationBar extends React.Component {
     );
   }
 }
+
+// export default NavigationBar;
