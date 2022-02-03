@@ -7,7 +7,8 @@
 	<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
 	<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
-	<!-- <script src="../js/ReactButton.js"></script> -->
+	<script src="../js/Admin.js"></script>
+	<script src="../js/NavigationBar.js"></script>
 	<link rel="stylesheet" type='text/css' href="../css/sample.css">
 </head>
 
@@ -21,6 +22,10 @@
 <script>
 
 const domContainer = document.querySelector('#sample-container');
+ReactDOM.render( React.createElement("div", null, [React.createElement(NavigationBar),
+												React.createElement(Admin)]),
+												 domContainer);
+
 
 
 </script>

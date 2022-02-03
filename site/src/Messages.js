@@ -6,7 +6,7 @@ class MessageItem extends React.Component {
 
 	render() {
 		return <div className='MessageItem' data-id={this.props.message.id}>
-			<span id="from">From {this.props.message.from}, {this.props.message.date}</span>
+			<span id="from">From {this.props.message.sender_name}, {this.props.message.date}</span>
 			<br />
 			<span>{this.props.message.message}</span>
 		</div>
@@ -78,7 +78,7 @@ class MessageList extends React.Component {
                 headers: { 'Content-Type': 'application/json' }
             });
         if (response.status == 200) {
-            alert("Your post is published !");
+            alert("Your message has been sent !");
 			document.getElementById('friend-select').selectedIndex = 0;
 			document.getElementById('send_message').value = "";
         }
