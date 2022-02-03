@@ -1,41 +1,38 @@
 
-class ReactButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handle_click = this.handle_click.bind(this);
-  }
+// class ReactButton extends React.Component {
+//     constructor(props) {
+//       super(props);
+//       this.handle_click = this.handle_click.bind(this);
+//     }
 
-  handle_click() {
-    window.location.href = this.props.relocation;
-  }
+//     handle_click() {
+//       window.location.href = this.props.relocation;
+//     }
 
-  render() {
-    return React.createElement(
-      'button',
-      {
-        onClick: this.handle_click },
-      this.props.name ? this.props.name : 'No idea'
-    );
-  }
-}
+//     render() {
+//       return <button
+//         onClick={this.handle_click}>{this.props.name ? this.props.name : 'No idea'}
+//       </button>
+//     }
+//   }
 
 // import ReactButton from './ReactButton';
 
 class NavigationBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html' }),
-      React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' }),
-      React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' }),
-      React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
-    );
-  }
+    render() {
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html' }),
+            React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' }),
+            React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' }),
+            React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
+        );
+    }
 }
 
 // export default NavigationBar;
