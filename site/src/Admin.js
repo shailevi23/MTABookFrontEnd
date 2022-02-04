@@ -31,9 +31,15 @@ class Admin extends React.Component {
 			<div>
                 <div>Send a message to all users</div>
 				<input type="text" id="send_message" placeholder="Write a message" required></input>
-				<br></br>
 				<button onClick={this.handle_click}>Send</button>
+                <br></br>
+                <div>
+                <ReactButton name='Approve Users' relocation = '/pages/approve.html'/>
+                <ReactButton name='Messages' relocation = '/pages/messages.html'/>
+                <ReactButton name='Admin' relocation = '/pages/admin.html'/>
+                <ReactButton name='About' relocation = '/pages/about.html'/>
+                </div>     
 			</div>
-		</div>
+	    </div>
     }
 }

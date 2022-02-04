@@ -35,11 +35,19 @@ class Admin extends React.Component {
                     'Send a message to all users'
                 ),
                 React.createElement('input', { type: 'text', id: 'send_message', placeholder: 'Write a message', required: true }),
-                React.createElement('br', null),
                 React.createElement(
                     'button',
                     { onClick: this.handle_click },
                     'Send'
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(ReactButton, { name: 'Approve Users', relocation: '/pages/approve.html' }),
+                    React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' }),
+                    React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' }),
+                    React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
                 )
             )
         );
