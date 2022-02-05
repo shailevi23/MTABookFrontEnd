@@ -45,9 +45,9 @@ class Admin extends React.Component {
                     'div',
                     null,
                     React.createElement(ReactButton, { name: 'Approve Users', relocation: '/pages/approve.html' }),
-                    React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' }),
-                    React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' }),
-                    React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
+                    React.createElement(ReactButton, { name: 'Suspend Users', relocation: '/pages/suspend.html' }),
+                    React.createElement(ReactButton, { name: 'Restore Users', relocation: '/pages/restore.html' }),
+                    React.createElement(ReactButton, { name: 'Delete Users', relocation: '/pages/delete.html' })
                 )
             )
         );

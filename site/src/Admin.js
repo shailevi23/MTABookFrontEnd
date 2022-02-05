@@ -35,9 +35,9 @@ class Admin extends React.Component {
                 <br></br>
                 <div>
                 <ReactButton name='Approve Users' relocation = '/pages/approve.html'/>
-                <ReactButton name='Messages' relocation = '/pages/messages.html'/>
-                <ReactButton name='Admin' relocation = '/pages/admin.html'/>
-                <ReactButton name='About' relocation = '/pages/about.html'/>
+                <ReactButton name='Suspend Users' relocation = '/pages/suspend.html'/>
+                <ReactButton name='Restore Users' relocation = '/pages/restore.html'/>
+                <ReactButton name='Delete Users' relocation = '/pages/delete.html'/>
                 </div>     
 			</div>
 	    </div>

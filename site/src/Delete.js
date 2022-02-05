@@ -5,13 +5,13 @@ class UserItem extends React.Component {
 	}
 
     handle_click() {
-		if (this.props.handle_approve) this.props.handle_approve(this.props.user.id);
+		if (this.props.handle_delete) this.props.handle_delete(this.props.user.id);
 	}
 
 	render() {
 		return <div className='UserItem' data-id={this.props.user.id}>
 			<span id="username">{this.props.user.name}</span>
-            <button onClick={this.handle_click}>Approve</button>
+            <button onClick={this.handle_click}>Delete</button>
 		</div>
 	}
 }
@@ -20,7 +20,7 @@ class UserItem extends React.Component {
 class UserList extends React.Component {
     constructor(props) {
 		super(props);
-        this.handle_approve = this.handle_approve.bind(this);
+        this.handle_delete = this.handle_delete.bind(this);
         this.state = { users: []}
 	}
 
@@ -39,13 +39,15 @@ class UserList extends React.Component {
 		return data;
 	}
 
-    async handle_approve(id) {
-		const response = await fetch('/api/approve/' + id,
+    async handle_delete(id) {
+		const response = await fetch('/api/delete_user_by_admin/',
             {
-                method: 'PUT'
+                method: 'DELETE',
+                body: JSON.stringify({ id: id }),
+                headers: { 'Content-Type': 'application/json' }
             });
         if (response.status == 200) {
-            alert("User has been approved !");
+            alert("User has been deleted !");
 			this.update_list();
         }
 
@@ -57,11 +59,7 @@ class UserList extends React.Component {
 
     async update_list() {
 		const users = await this.fetch_users();
-        const new_users = users.filter((item) => {
-            if(item.status === "created"){
-                return item;
-            };})
-		this.setState({ users: new_users });
+		this.setState({ users: users });
 	}
     
     render() {
@@ -69,12 +67,12 @@ class UserList extends React.Component {
 			<div id="user">
 				{this.state.users.map((item, index) => {
 					return <UserItem 
-                    handle_approve={this.handle_approve} user={item} key={index} />
+                    handle_delete={this.handle_delete} user={item} key={index} />
                         
 				})}
 			</div>
             <span style={{ display: (this.state.users.length ? 'none' : 'block') }}>
-					 You have no users to approve!
+					 You have no users to delete!
 				</span>
 		</div>
     }
@@ -82,7 +80,7 @@ class UserList extends React.Component {
 
 
 
-class Approve extends React.Component {
+class Delete extends React.Component {
     constructor(props) {
 		super(props);
 	}
