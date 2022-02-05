@@ -29,7 +29,7 @@ class PostList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handle_click = this.handle_click.bind(this);
-		this.state = { posts: [] };
+		this.state = { posts: [], isNewPost: false };
 	}
 
 	async componentDidMount() {
@@ -82,7 +82,7 @@ class PostList extends React.Component {
 				React.createElement('br', null),
 				React.createElement(
 					'button',
-					{ onClick: this.handle_click },
+					{ onClick: this.handle_click, style: this.state.isNewPost ? { color: '#f44336' } : { color: 'none' } },
 					'Post'
 				)
 			),
@@ -112,6 +112,11 @@ class Home extends React.Component {
 				'div',
 				null,
 				React.createElement(PostList, null)
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(LogOut, null)
 			)
 		);
 	}

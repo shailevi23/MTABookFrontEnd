@@ -21,14 +21,35 @@
 class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
+        this.handle_home_click = this.handle_home_click.bind(this);
+        this.handle_messages_click = this.handle_messages_click.bind(this);
+        this.state = { isNewMessage: false, isNewPost: false };
+    }
+
+    async handle_home_click() {
+        const newState = !isNewMessage;
+        this.setState({ isNewMessage: newState });
+    }
+
+    async handle_messages_click() {
+        const newState = !isNewPost;
+        this.setState({ isNewPost: newState });
     }
 
     render() {
         return React.createElement(
             'div',
             null,
-            React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html' }),
-            React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' }),
+            React.createElement(
+                'button',
+                { onClick: this.handle_home_click },
+                React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html' })
+            ),
+            React.createElement(
+                'button',
+                { onClick: this.handle_messages_click },
+                React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html' })
+            ),
             React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' }),
             React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
         );

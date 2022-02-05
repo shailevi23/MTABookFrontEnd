@@ -103,14 +103,14 @@ function compare_password(password, current_user) {
 }
 
 function log_out(req, res) {
-	const user_email = req.body.user.email;
+	//const user_email = req.body.user.email;
 	g_tokens[req.token] = false;
-	if (g_users.find(user => user.email === user_email)) {
-		res.send(JSON.stringify("Log out succesfuly !"));
-	}
-	else {
-		res.send(JSON.stringify("User not logged in, cant logout"));
-	}
+	// if (g_users.find(user => user.email === user_email)) {
+	// 	res.send(JSON.stringify("Log out succesfuly !"));
+	// }
+	// else {
+	// 	res.send(JSON.stringify("User not logged in, cant logout"));
+	// }
 }
 
 function register(req, res) {

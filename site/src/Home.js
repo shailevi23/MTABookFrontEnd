@@ -17,8 +17,8 @@ class PostList extends React.Component {
     constructor(props) {
 		super(props);
 		this.handle_click = this.handle_click.bind(this);
-        this.state = { posts: [] }
-	}
+        this.state = { posts: [], isNewPost: false }
+	} 
 
     async componentDidMount() {
 		this.update_list();
@@ -68,6 +68,7 @@ class PostList extends React.Component {
 				<input type="text" id="post_message" placeholder="Write a post" required></input>
 				<br />
 				<button onClick={this.handle_click}>Post</button>
+				{/* <button onClick={this.handle_click} style={this.state.isNewPost ? { color:'#f44336'} : { color:'none'}}>Post</button> */}
 			</div>
 			<br />
 			<div id="post">
@@ -81,7 +82,6 @@ class PostList extends React.Component {
 }
 
 
-
 class Home extends React.Component {
     constructor(props) {
 		super(props);
@@ -90,6 +90,7 @@ class Home extends React.Component {
     render() {
 		return <div>
 			<div><PostList/></div>
+			<div><LogOut/></div>
 		</div>
     }
 }
