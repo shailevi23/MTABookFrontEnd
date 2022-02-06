@@ -12,6 +12,8 @@ function User(name, id, email, password, date, status) {
 	this.password = password;
 	this.date = date;
 	this.status = status;
+	this.last_message = 0;
+	this.last_post = 0;
 }
 
 const g_users = [];
@@ -68,7 +70,7 @@ async function log_in(req, res) {
 		const token = jwt.sign({ current_user }, 'my_secret_key', { expiresIn: 60 * 10 });
 		g_tokens[token] = true;
 		g_id_to_tokens[current_user.id] = token;
-		res.cookie("stam", token);
+		res.cookie("token", token);
 		// res.send(JSON.stringify({ "token": g_id_to_tokens[current_user.id] }));
 		res.send();
 		return
@@ -111,6 +113,10 @@ function log_out(req, res) {
 	// else {
 	// 	res.send(JSON.stringify("User not logged in, cant logout"));
 	// }
+	res.clearCookie("token");
+	res.send(JSON.stringify("Log out succesfuly !"));
+
+	// res.end()  ????
 }
 
 function register(req, res) {
@@ -170,15 +176,15 @@ function verifyToken(req, res, next) {
 }
 
 function check_validation_token(req, res, next) {
-	stam = req.cookies["stam"]
-	jwt.verify(stam, 'my_secret_key', function (err, result) {
+	const token = req.cookies["token"]
+	jwt.verify(token, 'my_secret_key', function (err, result) {
 		if (err) {
 			res.status(StatusCodes.FORBIDDEN); // Forbidden
 			res.send("No access")
 			return;
 		}
 		else {
-			if (g_tokens[stam]) {
+			if (g_tokens[token]) {
 				req.body.user = result.current_user;
 				next();
 			}

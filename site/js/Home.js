@@ -38,6 +38,7 @@ class PostList extends React.Component {
 
 	async fetch_posts() {
 		const response = await fetch('/api/get_posts');
+
 		if (response.status != 200) {
 			window.location.href = '/pages/login.html';
 			alert("You have to log in !");
@@ -82,7 +83,7 @@ class PostList extends React.Component {
 				React.createElement('br', null),
 				React.createElement(
 					'button',
-					{ onClick: this.handle_click, style: this.state.isNewPost ? { color: '#f44336' } : { color: 'none' } },
+					{ onClick: this.handle_click },
 					'Post'
 				)
 			),

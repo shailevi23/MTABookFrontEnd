@@ -68,7 +68,25 @@ function send_message(req, res) {
 function get_messages(req, res) {
 	const messages = g_messages.filter(message => (message.to === everyone || message.to == req.body.user.id)
 										 && message.from != req.body.user.id);
+
+	const current_user = user.g_users.find(user => user.id == req.body.user.id);
+	current_user.last_message = messages.length;
+	user.g_users[req.body.user.id] = current_user;
 	res.send(JSON.stringify(messages));
 }
 
-module.exports = { messages_file, g_messages, send_message, get_messages };
+function check_new_messages(req, res) {
+	const messages = g_messages.filter(message => (message.to === everyone || message.to == req.body.user.id)
+										 && message.from != req.body.user.id);
+
+	if(user.g_users[req.body.user.id].last_message != messages.length) {
+		res.send(JSON.stringify({"new_messages" : true}));
+	}
+	else {
+		res.send(JSON.stringify({"new_messages" : false}));
+	}
+	
+	
+}
+
+module.exports = { messages_file, g_messages, send_message, get_messages, check_new_messages };

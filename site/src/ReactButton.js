@@ -1,5 +1,3 @@
-// import React, { Component } from 'react';
-
 class ReactButton extends React.Component {
   constructor(props) {
     super(props);
@@ -12,11 +10,11 @@ class ReactButton extends React.Component {
 
   render() {
     return <button
+      style={this.props.style}
       onClick={this.handle_click}>{this.props.name ? this.props.name : 'No idea'}
     </button>
   }
 }
 
-// export default ReactButton;
 
 

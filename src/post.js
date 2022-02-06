@@ -1,5 +1,6 @@
 const StatusCodes = require('http-status-codes').StatusCodes;
 const g_posts = []
+const user = require('./user.js');
 const posts_file = './files/posts.json';
 const db = require('./database.js');
 
@@ -46,6 +47,9 @@ function publish_post(req, res) {
 
 function get_posts(req, res) {
 	const posts = g_posts.filter(post => post.status == "published");
+	const current_user = user.g_users.find(user => user.id == req.body.user.id);
+	current_user.last_post = posts.length;
+	user.g_users[req.body.user.id] = current_user;
 	res.send(JSON.stringify(posts));
 	
 }
@@ -84,4 +88,16 @@ function delete_post(req, res) {
 	}
 }
 
-module.exports = { posts_file, g_posts, publish_post, get_posts, delete_post };
+function check_new_posts(req, res) {
+	const posts = g_posts.filter(post => post.status == "published");
+	if(user.g_users[req.body.user.id].last_post != posts.length) {
+		res.send(JSON.stringify({"new_posts" : true}));
+	}
+	else {
+		res.send(JSON.stringify({"new_posts" : false}));
+	}
+	
+	
+}
+
+module.exports = { posts_file, g_posts, publish_post, get_posts, delete_post, check_new_posts };

@@ -17,7 +17,7 @@ class PostList extends React.Component {
     constructor(props) {
 		super(props);
 		this.handle_click = this.handle_click.bind(this);
-        this.state = { posts: [], isNewPost: false }
+        this.state = { posts: [], isNewPost: false };
 	} 
 
     async componentDidMount() {
@@ -26,6 +26,7 @@ class PostList extends React.Component {
 
 	async fetch_posts() {
 		const response = await fetch('/api/get_posts');
+
 		if (response.status != 200) {
 			window.location.href = '/pages/login.html';
 			alert("You have to log in !");
