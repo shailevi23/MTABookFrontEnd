@@ -154,6 +154,17 @@ function register(req, res) {
 
 }
 
+function check_current_user(req, res) {
+		if(req.body.user.id === 1)
+		{
+			res.send(JSON.stringify({"isAdmin" : true}));
+		}
+		else{
+			res.send(JSON.stringify({"isAdmin" : false}));
+		}
+}
+
+
 function verifyToken(req, res, next) {
 // 	// Get auth header value
 // 	const bearerHeader = req.headers['authorization'];
@@ -199,4 +210,4 @@ function check_validation_token(req, res, next) {
 }
 
 
-module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, get_friends, verifyToken, check_validation_token, log_in, log_out, register };
+module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, get_friends, verifyToken, check_validation_token, log_in, log_out, register, check_current_user };

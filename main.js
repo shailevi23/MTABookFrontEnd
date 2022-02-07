@@ -69,6 +69,8 @@ router.get('/get_posts', user.check_validation_token, (req, res) => { post.get_p
 router.get('/get_messages', user.check_validation_token, (req, res) => { message.get_messages(req, res) })
 router.post('/send_message', user.check_validation_token, (req, res) => { message.send_message(req, res) })
 
+router.get('/check_current_user', user.check_validation_token, (req, res) => { user.check_current_user(req, res) })
+
 router.get('/new_posts', user.check_validation_token, (req, res) => { post.check_new_posts(req, res) })
 router.get('/new_messages', user.check_validation_token, (req, res) => { message.check_new_messages(req, res) })
 
