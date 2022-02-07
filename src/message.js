@@ -71,7 +71,8 @@ function get_messages(req, res) {
 
 	const current_user = user.g_users.find(user => user.id == req.body.user.id);
 	current_user.last_message = messages.length;
-	user.g_users[req.body.user.id] = current_user;
+	//user.g_users[req.body.user.id - 1] = current_user;
+	db.write_file(user.g_users, user.users_file);
 	res.send(JSON.stringify(messages));
 }
 

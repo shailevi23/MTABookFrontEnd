@@ -49,7 +49,8 @@ function get_posts(req, res) {
 	const posts = g_posts.filter(post => post.status == "published");
 	const current_user = user.g_users.find(user => user.id == req.body.user.id);
 	current_user.last_post = posts.length;
-	user.g_users[req.body.user.id] = current_user;
+	//user.g_users[req.body.user.id] = current_user;
+	db.write_file(user.g_users, user.users_file);
 	res.send(JSON.stringify(posts));
 	
 }
