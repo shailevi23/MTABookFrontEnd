@@ -25,12 +25,25 @@ class Login extends React.Component {
         return React.createElement(
             'div',
             null,
-            React.createElement('input', { type: 'email', id: 'email', placeholder: 'Email', required: true }),
-            React.createElement('input', { type: 'password', id: 'password', placeholder: 'Password', required: true }),
             React.createElement(
-                'button',
-                { onClick: this.handle_submit },
-                'Log in'
+                'div',
+                { className: 'title-text' },
+                React.createElement(
+                    'div',
+                    { className: 'title login' },
+                    'Log in'
+                )
+            ),
+            React.createElement(
+                'div',
+                { className: 'form-inner' },
+                React.createElement('input', { type: 'text', id: 'email', placeholder: 'Email', required: true }),
+                React.createElement('input', { type: 'password', id: 'password', placeholder: 'Password', required: true }),
+                React.createElement(
+                    'div',
+                    { className: 'btn' },
+                    React.createElement('input', { type: 'button', onClick: this.handle_submit, value: 'Log  in' })
+                )
             )
         );
     }

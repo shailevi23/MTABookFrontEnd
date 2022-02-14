@@ -1,30 +1,33 @@
 class UserItem extends React.Component {
 	constructor(props) {
 		super(props);
-        this.handle_click = this.handle_click.bind(this);
+		this.handle_click = this.handle_click.bind(this);
 	}
 
-    handle_click() {
+	handle_click() {
 		if (this.props.handle_delete) this.props.handle_delete(this.props.user.id);
 	}
 
 	render() {
 		return <div className='UserItem' data-id={this.props.user.id}>
 			<span id="username">{this.props.user.name}</span>
-            <button onClick={this.handle_click}>Delete</button>
+			<div className="btn">
+				<input type="button" value="Delete" onClick={this.handle_click}></input>
+			</div>
+			
 		</div>
 	}
 }
 
 
 class UserList extends React.Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
-        this.handle_delete = this.handle_delete.bind(this);
-        this.state = { users: []}
+		this.handle_delete = this.handle_delete.bind(this);
+		this.state = { users: [] }
 	}
 
-    async componentDidMount() {
+	async componentDidMount() {
 		this.update_list();
 	}
 
@@ -34,60 +37,63 @@ class UserList extends React.Component {
 			window.location.href = '/pages/login.html';
 			alert("You have to log in !");
 		}
-			
+
 		const data = await response.json();
 		return data;
 	}
 
-    async handle_delete(id) {
+	async handle_delete(id) {
 		const response = await fetch('/api/delete_user_by_admin/',
-            {
-                method: 'DELETE',
-                body: JSON.stringify({ id: id }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-        if (response.status == 200) {
-            alert("User has been deleted !");
+			{
+				method: 'DELETE',
+				body: JSON.stringify({ id: id }),
+				headers: { 'Content-Type': 'application/json' }
+			});
+		if (response.status == 200) {
+			alert("User has been deleted !");
 			this.update_list();
-        }
+		}
 
-        else {
-            const err = await response.text();
-            alert(err);
-        }
+		else {
+			const err = await response.text();
+			alert(err);
+		}
 	}
 
-    async update_list() {
+	async update_list() {
 		const users = await this.fetch_users();
 		this.setState({ users: users });
 	}
-    
-    render() {
+
+	render() {
 		return <div>
 			<div id="user">
 				{this.state.users.map((item, index) => {
-					return <UserItem 
-                    handle_delete={this.handle_delete} user={item} key={index} />
-                        
+					return <div className="user">
+						<UserItem
+							handle_delete={this.handle_delete} user={item} key={index} />
+					</div>
+
+
 				})}
 			</div>
-            <span style={{ display: (this.state.users.length ? 'none' : 'block') }}>
-					 You have no users to delete!
-				</span>
+			<span style={{ display: (this.state.users.length ? 'none' : 'block') }}>
+				You have no users to delete!
+			</span>
 		</div>
-    }
+	}
 }
 
 
 
 class Delete extends React.Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
 	}
 
-    render() {
+	render() {
 		return <div>
-			<div><UserList/></div>
+			<div><UserList /></div>
 		</div>
-    }
+	}
 }

@@ -6,7 +6,7 @@ class MessageItem extends React.Component {
 
 	render() {
 		return <div className='MessageItem' data-id={this.props.message.id}>
-			<span id="from">From {this.props.message.sender_name}, {this.props.message.date}</span>
+			<span className="topPart" id="from">From {this.props.message.sender_name}, {this.props.message.date}</span>
 			<br />
 			<span>{this.props.message.message}</span>
 		</div>
@@ -90,20 +90,25 @@ class MessageList extends React.Component {
 	}
 
     render() {
-		return <div>
-			
-			<div>
+		return <div>	
+			<div className="writeBox ">
 				<select id="friend-select">
     				<option value="">--Please choose a friend--</option>
 				</select>
-				<input type="text" id="send_message" placeholder="Write a message" required></input>
+				<textarea type="text" id="send_message" placeholder="Write a message" required></textarea>
 				<br></br>
-				<button onClick={this.handle_click}>Send</button>
+				<div className="btn">
+					<input type="button" value="Send" onClick={this.handle_click}></input>
+				</div>
+				
 			</div>
 			<div>
 				{this.state.messages.map((item, index) => {
-					return <MessageItem
+					return <div className="textBox">
+						<MessageItem
 						 message={item} key={index} />
+					</div>
+					 
 				})}
 				<span style={{ display: (this.state.messages.length ? 'none' : 'block') }}>
 					 You have no messsages!

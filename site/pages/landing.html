@@ -8,12 +8,12 @@
 	<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 
 	<script src="../js/ReactButton.js"></script>
-	<link rel="stylesheet" type='text/css' href="../css/sample.css">
+	<script src="../js/Landing.js"></script>
+	<link rel="stylesheet" type='text/css' href="../css/buttons.css">
+	<link rel="stylesheet" type='text/css' href="../css/test.css">
 </head>
 
 <body>
-
-	<h1>Landing Page<h1>
 	<div id='sample-container'></id>
 
 </body>
@@ -21,14 +21,13 @@
 <script>
 
 const domContainer = document.querySelector('#sample-container');
-ReactDOM.render( React.createElement("div", null, [React.createElement(ReactButton, {name : 'Log in', relocation : '/pages/login.html'}),
-												React.createElement(ReactButton, {name : 'Sign in', relocation : '/pages/register.html'})]),
-												 domContainer);
+// ReactDOM.render( React.createElement("div", null, [React.createElement(ReactButton, {name : 'Log in', relocation : '/pages/login.html'}),
+// 												React.createElement(ReactButton, {name : 'Sign in', relocation : '/pages/register.html'})]),
+// 												 domContainer);
+ReactDOM.render( React.createElement(Landing, null), domContainer);
 
-// ReactDOM.render( React.createElement("div", null,
-// 					React.createElement(ReactButton, {name : 'Log in'},
-// 					React.createElement(ReactButton, {name : 'Sign in'}))) 
-// 					, domContainer);
+
+
 </script>
 
 

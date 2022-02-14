@@ -29,21 +29,34 @@ class Register extends React.Component {
         return React.createElement(
             'div',
             null,
-            React.createElement('input', { type: 'name', id: 'name', placeholder: 'name', required: true }),
-            React.createElement('input', { type: 'email', id: 'email', placeholder: 'Email', required: true }),
-            React.createElement('input', { type: 'password', id: 'password', placeholder: 'Password', required: true }),
             React.createElement(
-                'button',
-                { disabled: this.state.visible, onClick: this.handle_submit },
-                'Sign'
+                'div',
+                { className: 'title-text' },
+                React.createElement(
+                    'div',
+                    { className: 'title' },
+                    'Register'
+                )
             ),
             React.createElement(
                 'div',
-                { style: { display: this.state.visible ? 'block' : 'none' } },
+                { className: 'form-inner' },
+                React.createElement('input', { type: 'text', id: 'name', placeholder: 'name', required: true }),
+                React.createElement('input', { type: 'text', id: 'email', placeholder: 'Email', required: true }),
+                React.createElement('input', { type: 'password', id: 'password', placeholder: 'Password', required: true }),
                 React.createElement(
-                    'span',
-                    null,
-                    'Registration confirmed, waiting for the admission!'
+                    'div',
+                    { className: 'btn' },
+                    React.createElement('input', { type: 'button', value: 'Sign in', disabled: this.state.visible, onClick: this.handle_submit })
+                ),
+                React.createElement(
+                    'div',
+                    { style: { display: this.state.visible ? 'block' : 'none' } },
+                    React.createElement(
+                        'span',
+                        null,
+                        'Registration confirmed, waiting for the admission!'
+                    )
                 )
             )
         );

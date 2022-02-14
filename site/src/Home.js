@@ -6,7 +6,7 @@ class PostItem extends React.Component {
 
 	render() {
 		return <div className='PostItem' data-id={this.props.post.id}>
-			<span id="from">From {this.props.post.publisher}, {this.props.post.date}</span>
+			<span className="topPart" id="from">From {this.props.post.publisher}, {this.props.post.date}</span>
 			<br />
 			<span>{this.props.post.message}</span>
 		</div>
@@ -38,8 +38,8 @@ class PostList extends React.Component {
 
     async update_list() {
 		const posts = await this.fetch_posts();
-		const reverse_posts = posts.reverse();
-		this.setState({ posts: reverse_posts });
+		// const reverse_posts = posts.reverse();
+		this.setState({ posts: posts });
 	}
 
 	async handle_click() {
@@ -65,17 +65,21 @@ class PostList extends React.Component {
 
     render() {
 		return <div>
-			<div>
-				<input type="text" id="post_message" placeholder="Write a post" required></input>
+			<div className="writeBox ">
+				<textarea type="text" id="post_message" placeholder="Write a post" required></textarea>
 				<br />
-				<button onClick={this.handle_click}>Post</button>
-				{/* <button onClick={this.handle_click} style={this.state.isNewPost ? { color:'#f44336'} : { color:'none'}}>Post</button> */}
+				<div className="btn">
+					<input type="button" value="Post" onClick={this.handle_click}></input>
+				</div>
 			</div>
 			<br />
-			<div id="post">
+			<div id="post"> 
 				{this.state.posts.map((item, index) => {
-					return <PostItem
+					return <div className="textBox">
+						<PostItem
 						 post={item} key={index} />
+					</div>
+					 
 				})}
 			</div>
 		</div>
@@ -91,7 +95,7 @@ class Home extends React.Component {
     render() {
 		return <div>
 			<div><PostList/></div>
-			<div><LogOut/></div>
+			{/* <div><LogOut/></div> */}
 		</div>
     }
 }

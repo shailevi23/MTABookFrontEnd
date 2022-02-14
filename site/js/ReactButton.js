@@ -9,12 +9,8 @@ class ReactButton extends React.Component {
   }
 
   render() {
-    return React.createElement(
-      'button',
-      {
-        style: this.props.style,
-        onClick: this.handle_click },
-      this.props.name ? this.props.name : 'No idea'
-    );
+    return React.createElement("input", { type: "button",
+      style: this.props.style,
+      onClick: this.handle_click, value: this.props.name ? this.props.name : 'No idea' });
   }
 }

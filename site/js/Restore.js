@@ -10,17 +10,17 @@ class UserItem extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
-			{ className: 'UserItem', 'data-id': this.props.user.id },
+			"div",
+			{ className: "UserItem", "data-id": this.props.user.id },
 			React.createElement(
-				'span',
-				{ id: 'username' },
+				"span",
+				{ id: "username" },
 				this.props.user.name
 			),
 			React.createElement(
-				'button',
-				{ onClick: this.handle_click },
-				'Restore'
+				"div",
+				{ className: "btn" },
+				React.createElement("input", { type: "button", value: "Restore", onClick: this.handle_click })
 			)
 		);
 	}
@@ -73,20 +73,24 @@ class UserList extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
-				{ id: 'user' },
+				"div",
+				{ id: "user" },
 				this.state.users.map((item, index) => {
-					return React.createElement(UserItem, {
-						handle_restore: this.handle_restore, user: item, key: index });
+					return React.createElement(
+						"div",
+						{ className: "user" },
+						React.createElement(UserItem, {
+							handle_restore: this.handle_restore, user: item, key: index })
+					);
 				})
 			),
 			React.createElement(
-				'span',
+				"span",
 				{ style: { display: this.state.users.length ? 'none' : 'block' } },
-				'You have no users to restore!'
+				"You have no users to restore!"
 			)
 		);
 	}
@@ -99,10 +103,10 @@ class Restore extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
+				"div",
 				null,
 				React.createElement(UserList, null)
 			)

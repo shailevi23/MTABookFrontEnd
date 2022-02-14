@@ -47,6 +47,15 @@ function publish_post(req, res) {
 
 function get_posts(req, res) {
 	const posts = g_posts.filter(post => post.status == "published");
+	const reverse_posts = posts.reverse();
+	for(let i=0; i< reverse_posts.length; i++) {
+		if(reverse_posts[i].user_id == req.body.user.id) {
+			reverse_posts.unshift(reverse_posts[i]);
+			reverse_posts.slice(i+1, 1);
+			break;
+		}
+	}
+
 	const current_user = user.g_users.find(user => user.id == req.body.user.id);
 	current_user.last_post = posts.length;
 	//user.g_users[req.body.user.id] = current_user;

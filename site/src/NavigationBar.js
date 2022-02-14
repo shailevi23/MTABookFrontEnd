@@ -35,13 +35,14 @@ class NavigationBar extends React.Component {
 	}
 
     render() {
-        return <div>
+        return <div className="navigationBar">
             <ReactButton name='Home' relocation = '/pages/home.html'
              style={this.state.new_posts ? { color:'#f44336'} : { color:'none'}}/>
             <ReactButton name='Messages' relocation = '/pages/messages.html'
             style={this.state.new_messages ? { color:'#f44336'} : { color:'none'}}/>
             <div id="divCheckbox" style={this.state.is_admin ? {display: 'inline-block'} : {display: 'none'}}><ReactButton name='Admin' relocation = '/pages/admin.html'/></div>
             <ReactButton name='About' relocation = '/pages/about.html'/>
+            <Logout></Logout>
         </div>
     }
 }

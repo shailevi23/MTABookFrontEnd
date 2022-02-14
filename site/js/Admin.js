@@ -28,27 +28,27 @@ class Admin extends React.Component {
             null,
             React.createElement(
                 'div',
-                null,
+                { className: 'writeBox ' },
                 React.createElement(
                     'div',
                     null,
                     'Send a message to all users'
                 ),
-                React.createElement('input', { type: 'text', id: 'send_message', placeholder: 'Write a message', required: true }),
-                React.createElement(
-                    'button',
-                    { onClick: this.handle_click },
-                    'Send'
-                ),
+                React.createElement('textarea', { type: 'text', id: 'send_message', placeholder: 'Write a message', required: true }),
                 React.createElement('br', null),
                 React.createElement(
                     'div',
-                    null,
-                    React.createElement(ReactButton, { name: 'Approve Users', relocation: '/pages/approve.html' }),
-                    React.createElement(ReactButton, { name: 'Suspend Users', relocation: '/pages/suspend.html' }),
-                    React.createElement(ReactButton, { name: 'Restore Users', relocation: '/pages/restore.html' }),
-                    React.createElement(ReactButton, { name: 'Delete Users', relocation: '/pages/delete.html' })
+                    { className: 'btn' },
+                    React.createElement('input', { type: 'button', value: 'Send', onClick: this.handle_click })
                 )
+            ),
+            React.createElement(
+                'div',
+                { className: 'navigationBar' },
+                React.createElement(ReactButton, { name: 'Approve Users', relocation: '/pages/approve.html' }),
+                React.createElement(ReactButton, { name: 'Suspend Users', relocation: '/pages/suspend.html' }),
+                React.createElement(ReactButton, { name: 'Restore Users', relocation: '/pages/restore.html' }),
+                React.createElement(ReactButton, { name: 'Delete Users', relocation: '/pages/delete.html' })
             )
         );
     }

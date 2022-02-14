@@ -26,9 +26,20 @@ class Login extends React.Component {
 
     render() {
         return <div>
-            <input type="email" id="email" placeholder="Email" required />
-            <input type="password" id="password" placeholder="Password" required />
-            <button onClick={this.handle_submit}>Log in</button>
+            <div className="title-text">
+                <div className="title login">
+                    Log in
+                </div>
+            </div>
+            <div className="form-inner">
+                <input type="text" id="email" placeholder="Email" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <div className="btn">
+                    <input type="button" onClick={this.handle_submit} value="Log  in"></input>
+                </div>
+               
+            </div>
+
         </div>
     }
 }

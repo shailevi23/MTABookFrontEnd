@@ -1,11 +1,11 @@
-class LogOut extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handle_logout = this.handle_logout.bind(this);
-	}
+class Logout extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handle_logout = this.handle_logout.bind(this);
+    }
 
-	async handle_logout() {
-		const response = await fetch('/api/logout',
+    async handle_logout() {
+        const response = await fetch('/api/logout',
             {
                 method: 'DELETE'
             });
@@ -17,9 +17,11 @@ class LogOut extends React.Component {
             const err = await response.text();
             alert(err);
         }
-	}
+    }
 
-	render() {
-		return <button onClick={this.handle_logout}>Logout</button>
-	}
+    render() {
+        return <div className="btn">
+            <input type="button" value="Logout" onClick={this.handle_logout}></input>
+        </div>
+    }
 }

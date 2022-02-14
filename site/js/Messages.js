@@ -5,19 +5,19 @@ class MessageItem extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
-			{ className: 'MessageItem', 'data-id': this.props.message.id },
+			"div",
+			{ className: "MessageItem", "data-id": this.props.message.id },
 			React.createElement(
-				'span',
-				{ id: 'from' },
-				'From ',
+				"span",
+				{ className: "topPart", id: "from" },
+				"From ",
 				this.props.message.sender_name,
-				', ',
+				", ",
 				this.props.message.date
 			),
-			React.createElement('br', null),
+			React.createElement("br", null),
 			React.createElement(
-				'span',
+				"span",
 				null,
 				this.props.message.message
 			)
@@ -100,39 +100,43 @@ class MessageList extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
-				null,
+				"div",
+				{ className: "writeBox " },
 				React.createElement(
-					'select',
-					{ id: 'friend-select' },
+					"select",
+					{ id: "friend-select" },
 					React.createElement(
-						'option',
-						{ value: '' },
-						'--Please choose a friend--'
+						"option",
+						{ value: "" },
+						"--Please choose a friend--"
 					)
 				),
-				React.createElement('input', { type: 'text', id: 'send_message', placeholder: 'Write a message', required: true }),
-				React.createElement('br', null),
+				React.createElement("textarea", { type: "text", id: "send_message", placeholder: "Write a message", required: true }),
+				React.createElement("br", null),
 				React.createElement(
-					'button',
-					{ onClick: this.handle_click },
-					'Send'
+					"div",
+					{ className: "btn" },
+					React.createElement("input", { type: "button", value: "Send", onClick: this.handle_click })
 				)
 			),
 			React.createElement(
-				'div',
+				"div",
 				null,
 				this.state.messages.map((item, index) => {
-					return React.createElement(MessageItem, {
-						message: item, key: index });
+					return React.createElement(
+						"div",
+						{ className: "textBox" },
+						React.createElement(MessageItem, {
+							message: item, key: index })
+					);
 				}),
 				React.createElement(
-					'span',
+					"span",
 					{ style: { display: this.state.messages.length ? 'none' : 'block' } },
-					'You have no messsages!'
+					"You have no messsages!"
 				)
 			)
 		);
@@ -146,10 +150,10 @@ class Messages extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
+				"div",
 				null,
 				React.createElement(MessageList, null)
 			)

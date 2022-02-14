@@ -5,19 +5,19 @@ class PostItem extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
-			{ className: 'PostItem', 'data-id': this.props.post.id },
+			"div",
+			{ className: "PostItem", "data-id": this.props.post.id },
 			React.createElement(
-				'span',
-				{ id: 'from' },
-				'From ',
+				"span",
+				{ className: "topPart", id: "from" },
+				"From ",
 				this.props.post.publisher,
-				', ',
+				", ",
 				this.props.post.date
 			),
-			React.createElement('br', null),
+			React.createElement("br", null),
 			React.createElement(
-				'span',
+				"span",
 				null,
 				this.props.post.message
 			)
@@ -50,8 +50,8 @@ class PostList extends React.Component {
 
 	async update_list() {
 		const posts = await this.fetch_posts();
-		const reverse_posts = posts.reverse();
-		this.setState({ posts: reverse_posts });
+		// const reverse_posts = posts.reverse();
+		this.setState({ posts: posts });
 	}
 
 	async handle_click() {
@@ -74,26 +74,30 @@ class PostList extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
-				null,
-				React.createElement('input', { type: 'text', id: 'post_message', placeholder: 'Write a post', required: true }),
-				React.createElement('br', null),
+				"div",
+				{ className: "writeBox " },
+				React.createElement("textarea", { type: "text", id: "post_message", placeholder: "Write a post", required: true }),
+				React.createElement("br", null),
 				React.createElement(
-					'button',
-					{ onClick: this.handle_click },
-					'Post'
+					"div",
+					{ className: "btn" },
+					React.createElement("input", { type: "button", value: "Post", onClick: this.handle_click })
 				)
 			),
-			React.createElement('br', null),
+			React.createElement("br", null),
 			React.createElement(
-				'div',
-				{ id: 'post' },
+				"div",
+				{ id: "post" },
 				this.state.posts.map((item, index) => {
-					return React.createElement(PostItem, {
-						post: item, key: index });
+					return React.createElement(
+						"div",
+						{ className: "textBox" },
+						React.createElement(PostItem, {
+							post: item, key: index })
+					);
 				})
 			)
 		);
@@ -107,17 +111,12 @@ class Home extends React.Component {
 
 	render() {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'div',
+				"div",
 				null,
 				React.createElement(PostList, null)
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement(LogOut, null)
 			)
 		);
 	}

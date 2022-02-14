@@ -1,14 +1,14 @@
 class Admin extends React.Component {
     constructor(props) {
-		super(props);
-		this.handle_click = this.handle_click.bind(this);
-	}
+        super(props);
+        this.handle_click = this.handle_click.bind(this);
+    }
 
-	async handle_click() {
-		const text = document.getElementById('send_message').value;
+    async handle_click() {
+        const text = document.getElementById('send_message').value;
         const everyone = "everyone";
 
-		const response = await fetch('/api/send_message',
+        const response = await fetch('/api/send_message',
             {
                 method: 'POST',
                 body: JSON.stringify({ text: text, friend_id: everyone }),
@@ -16,30 +16,33 @@ class Admin extends React.Component {
             });
         if (response.status == 200) {
             alert("Your message has been sent !");
-			document.getElementById('send_message').value = "";
+            document.getElementById('send_message').value = "";
         }
 
         else {
             const err = await response.text();
             alert(err);
         }
-	}
+    }
 
     render() {
-		return <div>
-			
-			<div>
+        return <div>
+            <div className="writeBox ">
                 <div>Send a message to all users</div>
-				<input type="text" id="send_message" placeholder="Write a message" required></input>
-				<button onClick={this.handle_click}>Send</button>
+                <textarea type="text" id="send_message" placeholder="Write a message" required></textarea>
                 <br></br>
-                <div>
-                <ReactButton name='Approve Users' relocation = '/pages/approve.html'/>
-                <ReactButton name='Suspend Users' relocation = '/pages/suspend.html'/>
-                <ReactButton name='Restore Users' relocation = '/pages/restore.html'/>
-                <ReactButton name='Delete Users' relocation = '/pages/delete.html'/>
-                </div>     
-			</div>
-	    </div>
+                <div className="btn">
+                    <input type="button" value="Send" onClick={this.handle_click}></input>
+                </div>
+
+            </div>
+            <div className="navigationBar">
+                <ReactButton name='Approve Users' relocation='/pages/approve.html' />
+                <ReactButton name='Suspend Users' relocation='/pages/suspend.html' />
+                <ReactButton name='Restore Users' relocation='/pages/restore.html' />
+                <ReactButton name='Delete Users' relocation='/pages/delete.html' />
+            </div>
+
+        </div>
     }
 }

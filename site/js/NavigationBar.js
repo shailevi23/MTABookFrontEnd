@@ -37,7 +37,7 @@ class NavigationBar extends React.Component {
     render() {
         return React.createElement(
             'div',
-            null,
+            { className: 'navigationBar' },
             React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html',
                 style: this.state.new_posts ? { color: '#f44336' } : { color: 'none' } }),
             React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html',
@@ -47,7 +47,8 @@ class NavigationBar extends React.Component {
                 { id: 'divCheckbox', style: this.state.is_admin ? { display: 'inline-block' } : { display: 'none' } },
                 React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' })
             ),
-            React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' })
+            React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' }),
+            React.createElement(Logout, null)
         );
     }
 }
