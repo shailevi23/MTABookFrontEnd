@@ -209,5 +209,16 @@ function check_validation_token(req, res, next) {
 	});
 }
 
+function getFormattedDate(date) {
+	var year = date.getFullYear();
+  
+	var month = (1 + date.getMonth()).toString();
+	month = month.length > 1 ? month : '0' + month;
+  
+	var day = date.getDate().toString();
+	day = day.length > 1 ? day : '0' + day;
+	
+	return month + '/' + day + '/' + year;
+  }
 
-module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, get_friends, verifyToken, check_validation_token, log_in, log_out, register, check_current_user };
+module.exports = {users_file, g_users, g_tokens, g_id_to_tokens, list_users, get_friends, verifyToken, check_validation_token, log_in, log_out, register, check_current_user, getFormattedDate };

@@ -13,7 +13,7 @@ html,body{
   }
 #sample-container{
     width: 80%;
-    height:80%;
+    /* height:80%; */
     overflow: hidden;
     max-width: 80%;
     /* max-height: 80%; */

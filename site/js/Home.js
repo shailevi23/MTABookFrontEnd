@@ -113,11 +113,7 @@ class Home extends React.Component {
 		return React.createElement(
 			"div",
 			null,
-			React.createElement(
-				"div",
-				null,
-				React.createElement(PostList, null)
-			)
+			React.createElement(PostList, null)
 		);
 	}
 }

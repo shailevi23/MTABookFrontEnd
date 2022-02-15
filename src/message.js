@@ -58,7 +58,7 @@ function send_message(req, res) {
 
 	const new_id = max_id + 1;
 
-	const new_message = new Message(text, new_id, new Date(), req.body.user.id, friend_id, req.body.user.name);
+	const new_message = new Message(text, new_id, user.getFormattedDate(new Date()), req.body.user.id, friend_id, req.body.user.name);
 	g_messages.push(new_message);
 	db.write_file(g_messages, messages_file);
 

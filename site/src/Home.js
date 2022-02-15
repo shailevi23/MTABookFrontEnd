@@ -14,13 +14,13 @@ class PostItem extends React.Component {
 }
 
 class PostList extends React.Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
 		this.handle_click = this.handle_click.bind(this);
-        this.state = { posts: [], isNewPost: false };
-	} 
+		this.state = { posts: [], isNewPost: false };
+	}
 
-    async componentDidMount() {
+	async componentDidMount() {
 		this.update_list();
 	}
 
@@ -31,12 +31,12 @@ class PostList extends React.Component {
 			window.location.href = '/pages/login.html';
 			alert("You have to log in !");
 		}
-			
+
 		const data = await response.json();
 		return data;
 	}
 
-    async update_list() {
+	async update_list() {
 		const posts = await this.fetch_posts();
 		// const reverse_posts = posts.reverse();
 		this.setState({ posts: posts });
@@ -46,24 +46,24 @@ class PostList extends React.Component {
 		const text = document.getElementById('post_message').value;
 
 		const response = await fetch('/api/publish',
-            {
-                method: 'POST',
-                body: JSON.stringify({ text: text }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-        if (response.status == 200) {
-            alert("Your post is published !");
+			{
+				method: 'POST',
+				body: JSON.stringify({ text: text }),
+				headers: { 'Content-Type': 'application/json' }
+			});
+		if (response.status == 200) {
+			alert("Your post is published !");
 			this.update_list();
 			document.getElementById('post_message').value = "";
-        }
+		}
 
-        else {
-            const err = await response.text();
-            alert(err);
-        }
+		else {
+			const err = await response.text();
+			alert(err);
+		}
 	}
 
-    render() {
+	render() {
 		return <div>
 			<div className="writeBox ">
 				<textarea type="text" id="post_message" placeholder="Write a post" required></textarea>
@@ -73,29 +73,28 @@ class PostList extends React.Component {
 				</div>
 			</div>
 			<br />
-			<div id="post"> 
+			<div id="post">
 				{this.state.posts.map((item, index) => {
 					return <div className="textBox">
 						<PostItem
-						 post={item} key={index} />
+							post={item} key={index} />
 					</div>
-					 
+
 				})}
 			</div>
 		</div>
-    }
+	}
 }
 
 
 class Home extends React.Component {
-    constructor(props) {
+	constructor(props) {
 		super(props);
 	}
 
-    render() {
+	render() {
 		return <div>
-			<div><PostList/></div>
-			{/* <div><LogOut/></div> */}
+			<PostList />
 		</div>
-    }
+	}
 }

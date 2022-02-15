@@ -36,7 +36,7 @@ function publish_post(req, res) {
 
 	const new_id = max_id + 1;
 
-	const new_post = new Post(text, new_id, new Date(), req.body.user.id, req.body.user.name);
+	const new_post = new Post(text, new_id, user.getFormattedDate(new Date()), req.body.user.id, req.body.user.name);
 	g_posts.push(new_post);
 
 	db.write_file(g_posts, posts_file);
@@ -51,7 +51,7 @@ function get_posts(req, res) {
 	for(let i=0; i< reverse_posts.length; i++) {
 		if(reverse_posts[i].user_id == req.body.user.id) {
 			reverse_posts.unshift(reverse_posts[i]);
-			reverse_posts.slice(i+1, 1);
+			reverse_posts.splice(i+1, 1);
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ function get_posts(req, res) {
 	current_user.last_post = posts.length;
 	//user.g_users[req.body.user.id] = current_user;
 	db.write_file(user.g_users, user.users_file);
-	res.send(JSON.stringify(posts));
+	res.send(JSON.stringify(reverse_posts));
 	
 }
 
