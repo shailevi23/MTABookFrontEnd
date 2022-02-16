@@ -4,6 +4,19 @@ class Admin extends React.Component {
         this.handle_click = this.handle_click.bind(this);
     }
 
+    componentDidMount(){
+        this.fetch_current_user();
+    }
+
+    async fetch_current_user() {
+        const response = await fetch('/api/check_current_user');
+        const data = await response.json();
+        if (!data.isAdmin) {
+            window.location.href = '/pages/login.html';
+            alert("No access !");
+        }
+    }
+
     async handle_click() {
         const text = document.getElementById('send_message').value;
         const everyone = "everyone";
