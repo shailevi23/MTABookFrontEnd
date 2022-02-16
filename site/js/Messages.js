@@ -50,7 +50,7 @@ class MessageList extends React.Component {
 	async update_list() {
 		const messages = await this.fetch_messages();
 		const reverse_messages = messages.reverse();
-		this.setState({ messages: reverse_messages });
+		this.setState({ messages: reverse_messages.slice(0, 20) });
 	}
 
 	async fetch_friends() {
@@ -114,6 +114,7 @@ class MessageList extends React.Component {
 						"--Please choose a friend--"
 					)
 				),
+				React.createElement("br", null),
 				React.createElement("textarea", { type: "text", id: "send_message", placeholder: "Write a message", required: true }),
 				React.createElement("br", null),
 				React.createElement(

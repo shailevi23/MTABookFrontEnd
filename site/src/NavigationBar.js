@@ -2,6 +2,9 @@ class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { new_posts: false, new_messages: false, is_admin: false };
+        this.check_new_posts = this.check_new_posts.bind(this);
+        this.check_new_messages = this.check_new_messages.bind(this);
+        this.fetch_current_user = this.fetch_current_user.bind(this);
     }
 
     componentDidMount() {
@@ -37,10 +40,11 @@ class NavigationBar extends React.Component {
     render() {
         return <div className="navigationBar">
             <ReactButton name='Home' relocation='/pages/home.html'
-                style={this.state.new_posts ? { color: '#f44336' } : { color: 'none' }} />
+                style={this.state.new_posts ? { background: 'black' } : { color: 'none' }} />
             <ReactButton name='Messages' relocation='/pages/messages.html'
-                style={this.state.new_messages ? { color: '#f44336' } : { color: 'none' }} />
-            <div id="divCheckbox" style={this.state.is_admin ? { display: 'inline-block' } : { display: 'none' }}><ReactButton name='Admin' relocation='/pages/admin.html' /></div>
+                style={this.state.new_messages ? { background: 'black' } : { color: 'none' }} />
+            <ReactButton style={this.state.is_admin ? { display: 'inline-block' } : { display: 'none' }} name='Admin' relocation='/pages/admin.html' />
+
             <ReactButton name='About' relocation='/pages/about.html' />
             <Logout></Logout>
         </div>

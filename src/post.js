@@ -100,7 +100,9 @@ function delete_post(req, res) {
 
 function check_new_posts(req, res) {
 	const posts = g_posts.filter(post => post.status == "published");
-	if(user.g_users[req.body.user.id].last_post != posts.length) {
+	const current_user = user.g_users.find(user => user.id == req.body.user.id);
+	
+	if(current_user.last_post != posts.length) {
 		res.send(JSON.stringify({"new_posts" : true}));
 	}
 	else {

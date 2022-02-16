@@ -38,8 +38,7 @@ class PostList extends React.Component {
 
 	async update_list() {
 		const posts = await this.fetch_posts();
-		// const reverse_posts = posts.reverse();
-		this.setState({ posts: posts });
+		this.setState({ posts: posts.slice(0, 20) });
 	}
 
 	async handle_click() {
@@ -77,7 +76,8 @@ class PostList extends React.Component {
 				{this.state.posts.map((item, index) => {
 					return <div className="textBox">
 						<PostItem
-							post={item} key={index} />
+							// post={item} key={index} />
+							post={item} />
 					</div>
 
 				})}

@@ -32,7 +32,7 @@ function list_users(req, res) {
 function get_friends(req, res) {
 	const friends= [];
 	for(let i=0; i < g_users.length; i++){
-		if(g_users[i].id != req.body.user.id) {
+		if(g_users[i].id != req.body.user.id && g_users[i].status === "actived") {
 			const friend = {id: g_users[i].id, name:g_users[i].name};
 			friends.push(friend);
 		}

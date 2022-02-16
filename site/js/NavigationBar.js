@@ -2,6 +2,9 @@ class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { new_posts: false, new_messages: false, is_admin: false };
+        this.check_new_posts = this.check_new_posts.bind(this);
+        this.check_new_messages = this.check_new_messages.bind(this);
+        this.fetch_current_user = this.fetch_current_user.bind(this);
     }
 
     componentDidMount() {
@@ -39,14 +42,10 @@ class NavigationBar extends React.Component {
             'div',
             { className: 'navigationBar' },
             React.createElement(ReactButton, { name: 'Home', relocation: '/pages/home.html',
-                style: this.state.new_posts ? { color: '#f44336' } : { color: 'none' } }),
+                style: this.state.new_posts ? { background: 'black' } : { color: 'none' } }),
             React.createElement(ReactButton, { name: 'Messages', relocation: '/pages/messages.html',
-                style: this.state.new_messages ? { color: '#f44336' } : { color: 'none' } }),
-            React.createElement(
-                'div',
-                { id: 'divCheckbox', style: this.state.is_admin ? { display: 'inline-block' } : { display: 'none' } },
-                React.createElement(ReactButton, { name: 'Admin', relocation: '/pages/admin.html' })
-            ),
+                style: this.state.new_messages ? { background: 'black' } : { color: 'none' } }),
+            React.createElement(ReactButton, { style: this.state.is_admin ? { display: 'inline-block' } : { display: 'none' }, name: 'Admin', relocation: '/pages/admin.html' }),
             React.createElement(ReactButton, { name: 'About', relocation: '/pages/about.html' }),
             React.createElement(Logout, null)
         );
