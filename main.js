@@ -79,6 +79,10 @@ app.use(express.static(path.join(__dirname, 'site')));
 
 app.use('/api',router)
 
+app.get('/', function(req, res){	
+	res.redirect("/pages/landing.html")
+});
+
 
 
 // Init 

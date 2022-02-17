@@ -11,9 +11,8 @@ class UserItem extends React.Component {
 	render() {
 		return <div className='UserItem' data-id={this.props.user.id}>
 			<span id="username">{this.props.user.name}</span>
-			<div className="btn">
-				<input type="button" value="Approve" onClick={this.handle_click}></input>
-			</div>
+
+			<input type="button" value="Approve" onClick={this.handle_click}></input>
 
 		</div>
 	}

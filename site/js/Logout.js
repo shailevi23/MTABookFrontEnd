@@ -19,7 +19,7 @@ class Logout extends React.Component {
     render() {
         return React.createElement(
             'div',
-            { className: 'btn' },
+            null,
             React.createElement('input', { type: 'button', value: 'Logout', onClick: this.handle_logout })
         );
     }

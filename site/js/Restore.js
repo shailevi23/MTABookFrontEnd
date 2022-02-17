@@ -17,11 +17,7 @@ class UserItem extends React.Component {
 				{ id: "username" },
 				this.props.user.name
 			),
-			React.createElement(
-				"div",
-				{ className: "btn" },
-				React.createElement("input", { type: "button", value: "Restore", onClick: this.handle_click })
-			)
+			React.createElement("input", { type: "button", value: "Restore", onClick: this.handle_click })
 		);
 	}
 }
