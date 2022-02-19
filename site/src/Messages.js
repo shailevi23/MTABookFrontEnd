@@ -44,8 +44,7 @@ class MessageList extends React.Component {
 	async fetch_friends() {
 		const response = await fetch('/api/get_friends');
 		if (response.status != 200) {
-			// window.location.href = '/pages/login.html';
-			// alert("You have to log in !");
+	
 		}
 		const data = await response.json();
 		return data;

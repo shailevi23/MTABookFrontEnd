@@ -30,50 +30,6 @@ html,body{
     transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
 
-/* input[type=button] {
-    border-radius: 5px;
-    color: #fff;
-    width: 25%;
-    height:100%;
-    margin-top: 5%;
-    border: none;
-    font-size: 20px;
-    background: -webkit-linear-gradient(right, #a445b2, #fa4299, #a445b2, #fa4299);
-} */
-
-/* .form-inner{
-    height: 50px;
-    text-align: center;
-    padding: 10%;
-}
-
-.form-inner input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    padding-left: 15px;
-    border-radius: 5px;
-    border: 1px solid lightgrey;
-    border-bottom-width: 2px;
-    font-size: 17px;
-    transition: all 0.3s ease;
-  } */
-
-  /* .form-inner  input:focus{
-    border-color: #fc83bb;
-  }
-  .form-inner  input::placeholder{
-    color: #999;
-    transition: all 0.3s ease;
-  }
-input:focus::placeholder{
-    color: #b3b3b3;
-  } */
-
-/* #divCheckbox{
-    width: 100%;
-} */
-
 #friend-select {
   margin-bottom: 1%;
 }
