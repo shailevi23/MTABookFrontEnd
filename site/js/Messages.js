@@ -150,14 +150,6 @@ class Messages extends React.Component {
 	}
 
 	render() {
-		return React.createElement(
-			"div",
-			null,
-			React.createElement(
-				"div",
-				null,
-				React.createElement(MessageList, null)
-			)
-		);
+		return React.createElement(MessageList, null);
 	}
 }

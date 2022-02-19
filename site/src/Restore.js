@@ -94,8 +94,6 @@ class Restore extends React.Component {
 	}
 
 	render() {
-		return <div>
-			<div><UserList /></div>
-		</div>
+		return <UserList />
 	}
 }

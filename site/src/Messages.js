@@ -125,8 +125,7 @@ class Messages extends React.Component {
 	}
 
     render() {
-		return <div>
-			<div><MessageList/></div>
-		</div>
+		return <MessageList/>
+		
     }
 }
